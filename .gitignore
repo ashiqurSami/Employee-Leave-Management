@@ -1,0 +1,42 @@
+lv_mgt_env/
+# Python
+*.py[cod]
+__pycache__/
+*.pyo
+*$py.class
+
+# Django
+*.sqlite3
+/db.sqlite3
+staticfiles/
+media/
+
+# Virtual Environment
+venv/
+env/
+.virtualenv/
+
+# Secret files
+*.env
+.env
+settings_local.py
+
+# Logs and debug files
+*.log
+*.out
+*.err
+
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Vendor Files
+*.egg-info
+build/
+dist/
+
+# Runtime files
+*.pid
