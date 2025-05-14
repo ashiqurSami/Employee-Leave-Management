@@ -1,20 +1,36 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Management</title>
+
+    <!-- Load the external CSS file for styling -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}</p>
-    <form action="{% url 'logout' %}" method="post" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    {% else %}
-        <h1>Hello, Guest!</h1>
-    {% endif %}
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+        <header>
+            <div class="header-content">
+                {% if user.is_authenticated %}
+                    <p>Welcome, <strong>{{ user.username }}</strong></p>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout">Logout</button>
+                    </form>
+                {% else %}
+                    <h1>Hello, Guest!</h1>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Content block for other templates to extend -->
+        <div class="main-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
 </body>
 </html>
