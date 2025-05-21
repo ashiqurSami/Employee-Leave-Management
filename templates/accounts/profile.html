@@ -1,14 +1,61 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-  <section class="profile-section">
-    <h2 class="profile-title">Your Profile</h2>
-    <form method="post" enctype="multipart/form-data" class="profile-form">
-      {% csrf_token %}
-      <div class="form-fields">
-        {{ form.as_p }}
-      </div>
-      <button type="submit" class="btn btn-primary">Save Changes</button>
+<div class="container mt-5" style="max-width: 600px; position: relative;">
+
+    <!-- Profile Photo top right -->
+    <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px;">
+        <label for="id_profile_photo" style="cursor: pointer; display: block; width: 100%; height: 100%;">
+            <img id="photoPreview"
+                 src="{% if user.employee.profile_photo %}{{ user.employee.profile_photo.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"
+                 alt="Profile Photo"
+                 class="img-thumbnail"
+                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        </label>
+        {{ form.profile_photo }}
+    </div>
+
+    <h2 class="mb-4 text-center">Your Profile</h2>
+
+    <form method="post" enctype="multipart/form-data" class="mt-5">
+        {% csrf_token %}
+
+        <!-- Department -->
+        <div class="mb-3">
+            <label for="id_department" class="form-label">Department</label>
+            {{ form.department }}
+        </div>
+
+        <!-- Job Title -->
+        <div class="mb-3">
+            <label for="id_job_title" class="form-label">Job Title</label>
+            {{ form.job_title }}
+        </div>
+
+        <!-- Save Button -->
+        <button type="submit" class="btn btn-primary w-100 mt-4">Save Changes</button>
     </form>
-  </section>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("id_profile_photo");
+        const preview = document.getElementById("photoPreview");
+
+        if (input) {
+            input.style.display = "none"; // hide input
+        }
+
+        input.addEventListener("change", function () {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
 {% endblock %}
