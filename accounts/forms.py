@@ -6,6 +6,11 @@ class EmployeeProfileForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = ['department', 'job_title', 'profile_photo']
+        widgets = {
+            'department': forms.TextInput(attrs={'class': 'form-control'}),
+            'job_title': forms.TextInput(attrs={'class': 'form-control'}),
+            'photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
 
 class EmployeeRegistrationForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput)
