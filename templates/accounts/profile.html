@@ -1,14 +1,63 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-  <section class="profile-section">
-    <h2 class="profile-title">Your Profile</h2>
-    <form method="post" enctype="multipart/form-data" class="profile-form">
-      {% csrf_token %}
-      <div class="form-fields">
-        {{ form.as_p }}
-      </div>
-      <button type="submit" class="btn btn-primary">Save Changes</button>
+<div class="container mt-5" style="max-width: 600px;">
+    <h2 class="mb-4 text-center">Your Profile</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Department -->
+        <div class="mb-3">
+            <label for="id_department" class="form-label">Department</label>
+            {{ form.department }}
+        </div>
+
+        <!-- Job Title -->
+        <div class="mb-3">
+            <label for="id_job_title" class="form-label">Job Title</label>
+            {{ form.job_title }}
+        </div>
+
+        <!-- Profile Photo (Custom Preview) -->
+        <div class="mb-3 text-center">
+            <label for="id_profile_photo" class="form-label">Profile Photo</label><br>
+            <label for="id_profile_photo">
+                <img id="photoPreview"
+                     src="{% if user.employee.profile_photo %}{{ user.employee.profile_photo.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"
+                     alt="Profile Photo"
+                     class="img-thumbnail"
+                     style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; cursor: pointer;">
+            </label>
+            {{ form.profile_photo.as_widget|safe }}
+        </div>
+
+        <!-- Save Button -->
+        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
     </form>
-  </section>
+</div>
+
+<!-- JS for Preview -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("id_profile_photo");
+        const preview = document.getElementById("photoPreview");
+
+        // Hide Django default file input label/clear stuff
+        if (input) {
+            input.classList.add("d-none");
+        }
+
+        input.addEventListener("change", function () {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
 {% endblock %}
