@@ -182,3 +182,11 @@ a:hover {
 .btn-primary:hover {
   background-color: #0056b3;
 }
+
+form.position-relative {
+    padding-top: 120px; /* leave space for the profile photo */
+}
+
+#id_profile_photo {
+  display: none;
+}

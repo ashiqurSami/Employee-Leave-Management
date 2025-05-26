@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="container mt-5" style="max-width: 600px;">
+<div class="container mt-5" style="max-width: 600px; position: relative;">
+
+    <!-- Profile Photo top right -->
+    <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px;">
+        <label for="id_profile_photo" style="cursor: pointer; display: block; width: 100%; height: 100%;">
+            <img id="photoPreview"
+                 src="{% if user.employee.profile_photo %}{{ user.employee.profile_photo.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"
+                 alt="Profile Photo"
+                 class="img-thumbnail"
+                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        </label>
+        {{ form.profile_photo }}
+    </div>
+
     <h2 class="mb-4 text-center">Your Profile</h2>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="mt-5">
         {% csrf_token %}
 
         <!-- Department -->
@@ -19,33 +32,18 @@
             {{ form.job_title }}
         </div>
 
-        <!-- Profile Photo (Custom Preview) -->
-        <div class="mb-3 text-center">
-            <label for="id_profile_photo" class="form-label">Profile Photo</label><br>
-            <label for="id_profile_photo">
-                <img id="photoPreview"
-                     src="{% if user.employee.profile_photo %}{{ user.employee.profile_photo.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"
-                     alt="Profile Photo"
-                     class="img-thumbnail"
-                     style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; cursor: pointer;">
-            </label>
-            {{ form.profile_photo.as_widget|safe }}
-        </div>
-
         <!-- Save Button -->
-        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+        <button type="submit" class="btn btn-primary w-100 mt-4">Save Changes</button>
     </form>
 </div>
 
-<!-- JS for Preview -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const input = document.getElementById("id_profile_photo");
         const preview = document.getElementById("photoPreview");
 
-        // Hide Django default file input label/clear stuff
         if (input) {
-            input.classList.add("d-none");
+            input.style.display = "none"; // hide input
         }
 
         input.addEventListener("change", function () {
