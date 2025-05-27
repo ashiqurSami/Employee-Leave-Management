@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="leave-requests">
+  <h2 class="title">All Leave Requests</h2>
+
+  {% if leaves %}
+  <table class="leave-table" role="table" aria-label="List of leave requests">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for leave in leaves %}
+      <tr>
+        <td>{{ leave.employee }}</td>
+        <td>{{ leave.start_date|date:"M d, Y" }}</td>
+        <td>{{ leave.end_date|date:"M d, Y" }}</td>
+        <td>{{ leave.reason }}</td>
+        <td>{{ leave.status|title }}</td>
+        <td>
+          {% if leave.status == 'Pending' %}
+            <a href="{% url 'approve_leave' leave.id %}" class="action-link approve">Approve</a> |
+            <a href="{% url 'reject_leave' leave.id %}" class="action-link reject">Reject</a>
+          {% else %}
+            {{ leave.status|title }} by {{ leave.approved_by.username }}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p class="no-leaves-msg">No leave requests found.</p>
+  {% endif %}
+</section>
+
+<style>
+  .leave-requests {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .title {
+    text-align: center;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.2rem;
+    font-size: 1.9rem;
+  }
+  .leave-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+  .leave-table th, .leave-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .leave-table th {
+    background-color: #2980b9;
+    color: white;
+    font-weight: 600;
+  }
+  .leave-table tbody tr:nth-child(even) {
+    background-color: #f4f8fb;
+  }
+  .action-link {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  .action-link.approve {
+    color: white;
+    background-color: #27ae60;
+  }
+  .action-link.approve:hover {
+    background-color: #219150;
+  }
+  .action-link.reject {
+    color: white;
+    background-color: #e74c3c;
+  }
+  .action-link.reject:hover {
+    background-color: #c0392b;
+  }
+  .no-leaves-msg {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-top: 2rem;
+  }
+</style>
+{% endblock %}
