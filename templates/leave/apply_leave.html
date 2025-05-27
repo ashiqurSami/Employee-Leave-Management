@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <section class="leave-application">
+    <h2 class="title">Apply for Leave</h2>
+    <form method="post" class="leave-form" novalidate>
+      {% csrf_token %}
+      <div class="form-fields">
+        {{ form.as_p }}
+      </div>
+      <button type="submit" class="btn-submit">Apply</button>
+    </form>
+  </section>
+{% endblock %}

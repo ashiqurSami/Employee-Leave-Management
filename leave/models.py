@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from accounts.models import Employee
 
@@ -20,6 +21,7 @@ class LeaveApplication(models.Model):
     end_date=models.DateField()
     reason=models.TextField()
     status=models.CharField(max_length=10,choices=STATUS,default='Pending')
+    approved_by=models.ForeignKey(get_user_model(),related_name='approved_leaves',null=True,blank=True,on_delete=models.SET_NULL)
     applied_on=models.DateField(auto_now_add=True)
 
     def __str__(self):

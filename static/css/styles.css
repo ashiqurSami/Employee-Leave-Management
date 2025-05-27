@@ -121,24 +121,24 @@ a:hover {
 }
 
 .profile-section {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 25px;
-  background-color: #f7f9fc;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
-  border-bottom: 2px solid #007BFF;
-  padding-bottom: 8px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 8px;
 }
 
 .profile-form .form-fields p {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .profile-form input[type="text"],
@@ -147,14 +147,14 @@ a:hover {
 .profile-form input[type="file"],
 .profile-form select,
 .profile-form textarea {
-  width: 100%;
-  padding: 10px 12px;
-  margin-top: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
 .profile-form input[type="text"]:focus,
@@ -163,24 +163,24 @@ a:hover {
 .profile-form input[type="file"]:focus,
 .profile-form select:focus,
 .profile-form textarea:focus {
-  border-color: #007BFF;
-  outline: none;
+    border-color: #007BFF;
+    outline: none;
 }
 
 .btn-primary {
-  background-color: #007BFF;
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 form.position-relative {
@@ -188,5 +188,108 @@ form.position-relative {
 }
 
 #id_profile_photo {
-  display: none;
+    display: none;
 }
+
+.passport-photo {
+    width: 120px; /* approx passport width */
+    height: 150px; /* approx passport height */
+    object-fit: cover;
+    border: 2px solid #007BFF;
+    border-radius: 4px; /* slightly rounded corners */
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+}
+
+.leave-application {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.form-fields p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #2980b9;
+}
+
+.leave-list {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem 1.5rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    color: #34495e;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.leave-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.leave-table th,
+.leave-table td {
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.leave-table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+}
+
+.leave-table tbody tr:nth-child(even) {
+    background-color: #f2f6fb;
+}
+
+.no-leaves-msg {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #888;
+    margin-top: 2rem;
+}
+
+
+
+
