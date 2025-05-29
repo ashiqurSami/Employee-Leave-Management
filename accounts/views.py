@@ -28,7 +28,14 @@ def profile_view(request):
         form=EmployeeProfileForm(request.POST,request.FILES,instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+        return redirect('profile')
     else:
         form=EmployeeProfileForm(instance=employee)
     return render(request,'accounts/profile.html',{'form':form})
+
+@login_required
+def login_redirect_view(request):
+    if request.user.is_staff:
+        return redirect('/leave/admin-dashboard/')
+    else:
+        return redirect('/leave/my-leaves/')

@@ -51,3 +51,20 @@ def admin_leave_list(request):
     leaves = LeaveApplication.objects.all().order_by('-applied_on')
     return render(request, 'leave/admin_leave_list.html', {'leaves': leaves})
 
+@login_required(login_url='login')
+@user_passes_test(is_admin)
+def admin_dashboard(request):
+    total_leaves= LeaveApplication.objects.count()
+    total_employees = Employee.objects.count()
+    pending_leaves = LeaveApplication.objects.filter(status='Pending').count()
+    approved_leaves = LeaveApplication.objects.filter(status='Approved').count()
+    rejected_leaves = LeaveApplication.objects.filter(status='Rejected').count()
+    context = {
+        'total_leaves': total_leaves,
+        'total_employees': total_employees,
+        'pending_leaves': pending_leaves,
+        'approved_leaves': approved_leaves,
+        'rejected_leaves': rejected_leaves,
+    }
+    return render(request, 'leave/admin_dashboard.html', context)
+
