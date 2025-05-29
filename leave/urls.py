@@ -8,4 +8,5 @@ urlpatterns = [
     path('admin/',views.admin_leave_list, name='admin_leave_list'),
     path('approve/<int:leave_id>/', views.approve_leave, name='approve_leave'),
     path('reject/<int:leave_id>/', views.reject_leave, name='reject_leave'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
 ]

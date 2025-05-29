@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="admin-dashboard">
+    <h2 class="dashboard-title">Admin Dashboard</h2>
+
+    <div class="dashboard-summary">
+        <ul class="summary-list">
+            <li class="summary-item"><strong>Total Employees</strong> {{ total_employees }}</li>
+            <li class="summary-item"><strong>Total Leave Requests</strong> {{ total_leaves }}</li>
+            <li class="summary-item"><strong>Pending Requests</strong> {{ pending_leaves }}</li>
+            <li class="summary-item"><strong>Approved Requests</strong> {{ approved_leaves }}</li>
+            <li class="summary-item"><strong>Rejected Requests</strong> {{ rejected_leaves }}</li>
+        </ul>
+    </div>
+
+    <div class="dashboard-actions">
+        <a href="{% url 'admin_leave_list' %}" class="btn-view-all">View All Leave Requests</a>
+    </div>
+</section>
+
+<style>
+    .admin-dashboard {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .dashboard-title {
+        text-align: center;
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        font-size: 1.9rem;
+    }
+
+    .dashboard-summary {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+    }
+
+    .summary-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .summary-item {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+    }
+
+    .summary-item strong {
+        color: #2980b9;
+    }
+
+    .dashboard-actions {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .btn-view-all {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-view-all:hover {
+        background-color: #2980b9;
+    }
+</style>
+{% endblock %}
