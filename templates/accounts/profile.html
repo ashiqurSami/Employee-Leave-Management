@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5" style="max-width: 600px; position: relative;">
+
+    <h2 class="mb-4 text-center">Your Profile</h2>
+
+    <form method="post" enctype="multipart/form-data" class="mt-5 profile-form">
+        {% csrf_token %}
+
+        <!-- Department -->
+        <div class="mb-3">
+            <label for="id_department" class="form-label">Department</label>
+            {{ form.department }}
+        </div>
+
+        <!-- Job Title -->
+        <div class="mb-3">
+            <label for="id_job_title" class="form-label">Job Title</label>
+            {{ form.job_title }}
+        </div>
+
+        <!-- Profile Photo after Job Title -->
+        <div class="mb-3 profile-photo-wrapper">
+            <label for="id_profile_photo" style="cursor: pointer; display: inline-block;">
+                <img id="photoPreview"
+                     src="{% if user.employee.profile_photo %}{{ user.employee.profile_photo.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}"
+                     alt="Profile Photo"
+                     class="passport-photo">
+            </label>
+            {{ form.profile_photo }}
+        </div>
+
+        <!-- Save Button -->
+        <button type="submit" class="btn btn-primary mt-4">Save Changes</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("id_profile_photo");
+        const preview = document.getElementById("photoPreview");
+
+        if (input) {
+            input.style.display = "none";  // hide actual file input
+
+            input.addEventListener("change", function () {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
